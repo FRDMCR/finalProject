@@ -81,6 +81,7 @@ if __name__ == "__main__":
     labelCVData.pack(side = LEFT)
 
     #---------------주문 현황---------------#
+    #참조 : https://076923.github.io/posts/Python-tkinter-30/
     labelOrder = Label(window, text = "주문 현황", width = 80, fg = "white", bg = "black")
     labelOrder.pack(side = TOP, anchor = W)
 
@@ -106,6 +107,12 @@ if __name__ == "__main__":
     treeOrder.column("#5", width=80)
     treeOrder.column("#6", width=80)
     treeOrder.column("#7", width=80)
+
+    
+    orderStatList = func.readOrderStat()
+    for i in range(len(treelist)):
+    
+        treeview.insert('', 'end', text=i, values=treelist[i], iid=str(i)+"번")
     treeYscrollbar.pack(side=RIGHT, fill=Y)
     treeOrder.pack(fill=X, side = LEFT)
 
