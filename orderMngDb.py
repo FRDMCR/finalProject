@@ -1,10 +1,5 @@
-#insert나 update 할 떄 key 예외처리
-#PK는 수정 x
-#orderDetail 수정할 때 unitPrice는 productID에서 
-#orderDetail 수정할 때 productID 중보 예외처리
-#delete 질문
-#inset도 거래처 정보 추가? 주문 번호 추가? 품목 추가?  주문 현황 자체를 추가하는건지 각 테이블별로 추가하는건지
-#수정도
+#inset 4 cases
+#수정 주문번호 제외 모두
 '''
 //작성자--------------------------//
 충북대학교 컴퓨터공학과
@@ -69,7 +64,7 @@ class Function() :
                                                         # row[6] = TotalPrice
         return rowsList
 
-    ## 주문번호는 자동증가, 주문 일자는 현재 일시, 품목 코드 선택 -> 품목명 & 단가 자동 선택, 수량 입력, 금액 자동 계산 ##
+    ## 추가 & 수정 ##
     def insert(self, customerID, companyName, orderID, orderDate,
                 productID, productName, unitPrice, quantity) :
         sql = ""  
@@ -85,8 +80,17 @@ class Function() :
 
             con.commit()
 
-    def delete(self) :
+    def delete(self, orderID, productID) :
+        sql = ""
         with sqlite3.connect(PATH) as con :
             cur = con.cursor()
 
+            sql = query.deleteOrderDetails(orderID, productID)
+            cur.execute(sql)
+            sql = query.deleteOrders(orderID)
+            cur.execute(sql)
+            sql = query.deletePorducts(productID)
+            cur.execute(sql)
+            
+            
             con.commit()

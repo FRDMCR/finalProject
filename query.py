@@ -21,6 +21,16 @@ class Query() :
     def __init__(self):
         pass
 
+    ## 각 테이블 별 PK 가져오기 ##
+    def selectCustomersPK(self) :
+        return """SELECT CustomerID FROM Customers"""
+
+    def selectProductsPK(self) :
+        return """SELECT ProductID FROM Products"""
+
+    def selectOrders(self) :
+        return """SELECT OrderID FROM Orders"""
+
     ## 거래처 현황 조회 쿼리문 ##
     def selectCustomerStat(self) :
         return """SELECT DISTINCT a.CustomerID, a.CompanyName
@@ -74,9 +84,7 @@ class Query() :
         return f"""UPDATE Orders SET CustomerID = {customerID}, OrderDate = {orderDate}
                 WHERE OrderID = {orderID}"""
 
-    def updateOrderDetails(self, orderID, productID, unitPrice, quantity) :
-        return f"""UPDATE Orders SET ProductID = {productID}, UnitPrice = {unitPrice}, Quantity = {quantity}
-                WHERE OrderID = {orderID}"""
+    # orderDetails는 insertOrderDetails로 수정
 
     ## 각 테이블 별 삭제 쿼리문 ##
     def deletePorducts(self, productID) :
@@ -89,4 +97,5 @@ class Query() :
     
     def deleteOrderDetails(self, productID, orderID) :
         return f"""DELETE FROM OrderDetails
-                WHERE ProductID = {productID}, OrderID = {orderID}"""
+                WHERE ProductID = {productID} AND OrderID = {orderID}"""
+                

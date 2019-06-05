@@ -64,6 +64,7 @@ if __name__ == "__main__":
     aboutMenu.add_cascade(label = "프로그램 정보", command = funcAbout)
     
     #------------거래처 현황---------------#
+    #참조 : http://zeroplus1.zc.bz/jh/web/main.php?id=174&category=ETC
     labelCustomer = Label(window, text = "거래처 현황", width = 80, fg = "white", bg = "black")
     labelCustomer.pack(side = TOP, anchor = W)
 
@@ -71,6 +72,7 @@ if __name__ == "__main__":
     comboboxCustomer['values'] = func.readCustomerStat('name')
     comboboxCustomer.pack(side = TOP, anchor = W)
     comboboxCustomer.config(state='readonly')
+    comboboxCustomer.current(0)
     
     frameCViews = Frame(window)
     frameCViews.pack(side = TOP, anchor = W)
@@ -108,11 +110,12 @@ if __name__ == "__main__":
     treeOrder.column("#6", width=80)
     treeOrder.column("#7", width=80)
 
+    print(comboboxCustomer.get())
+    #orderStatList = func.readOrderStat(comboboxCustomer.get())
+    #for i in range(len(orderStatList)):
     
-    orderStatList = func.readOrderStat()
-    for i in range(len(treelist)):
-    
-        treeview.insert('', 'end', text=i, values=treelist[i], iid=str(i)+"번")
+    #    orderStatList.insert('', 'end', text=orderStatList[i][0], values=orderStatList[i][1:], iid=orderStatList[i][0])
+
     treeYscrollbar.pack(side=RIGHT, fill=Y)
     treeOrder.pack(fill=X, side = LEFT)
 
