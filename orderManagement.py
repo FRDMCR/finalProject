@@ -40,7 +40,6 @@ def funcDelete(*args):
     printOrderStat() # 주문 현황과 조회 수 바로 업데이트
 
 ## 거래처 선택 시 해당 주문 현황 출력, 조회 수 업데이트 콜백 ##
-# 참조 : https://stackoverflow.com/questions/22812134/how-to-clear-an-entire-treeview-with-tkinter
 def printOrderStat(*args) :
     orderStat.treeOrder.delete(*orderStat.treeOrder.get_children())
     orderStatList = func.readOrderStat(customerStat.getSelected())
@@ -84,7 +83,7 @@ class AboutMenu :
         학과 : 컴퓨터공학과
         학번 : 2014040013
         메일주소 : tjdwls01007@naver.com
-        마지막 수정 날짜 : 2019-06-12""")
+        마지막 수정 날짜 : 2019-06-16""")
 
     
 class CustomerStat :
@@ -92,7 +91,6 @@ class CustomerStat :
         거래처 현황 위젯
     """
     def __init__(self, window):
-    # 참조 : http://zeroplus1.zc.bz/jh/web/main.php?id=174&category=ETC
         self.labelCustomer = Label(window, text = "거래처 현황", width = 89, fg = "white", bg = "black")
         self.labelCustomer.pack(side = TOP, anchor = W)
 
@@ -137,7 +135,6 @@ class CurrentTime :
         self.updateTime()
         
     ## 현재 일시 실시간 업데이트 ##
-    # 참조 : https://thrillfighter.tistory.com/413
     def updateTime(self):
         self.now = datetime.now()
         self.labelTData.configure(text = "%04d-%02d-%02d %02d:%02d:%02d" % 
@@ -149,7 +146,6 @@ class OrderStat :
         주문 현황 위젯
     """
     def __init__(self, window):
-    #참조 : https://076923.github.io/posts/Python-tkinter-30/
         self.labelOrder = Label(window, text = "주문 현황", width = 89, fg = "white", bg = "black")
         self.labelOrder.pack(side = TOP, anchor = W)
         
@@ -217,7 +213,6 @@ class FuncButton:
 class InsertWin :
     """
         입력 창 위젯
-        참고 : https://www.python-course.eu/tkinter_entry_widgets.php
     """
     def __init__(self, window):
         self.insertWin = Toplevel(window)

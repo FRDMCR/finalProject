@@ -140,19 +140,12 @@ class Function :
                     
                     cur.execute(sqlCus)
                     con.commit()
-                    print(sqlOrd)
                     cur.execute(sqlOrd)
                     con.commit()
-                    print("2")
-                    print(sqlPro)
                     cur.execute(sqlPro)
                     con.commit()
-                    
-                    print("3")
-                    print(sqlOrdd)
                     cur.execute(sqlOrdd)
                     con.commit()
-                    print("4")
 
                 elif cusCheck == "duplCustomer" and ordCheck == "clear" and proCheck == "clear" : 
                     # 거래처는 기존, 품목, 주문, 주문 세부 정보 추가
@@ -229,6 +222,3 @@ class Function :
             cur.execute(sql)
             
             con.commit()
-'''
-test = Function()
-print(test.getIDList('OrderDetails'))'''
