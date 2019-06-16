@@ -36,8 +36,16 @@ def createUpdateWin(*args):
 
 ## 삭제 기능 콜백 ##
 def funcDelete(*args):
-    func.delete(orderStat.orderID)
-    printOrderStat() # 주문 현황과 조회 수 바로 업데이트
+    response = messagebox.askquestion("삭제 확인", "정말로 삭제하시겠습니까?")
+    if response == 'yes' : # '예'를 누르면 삭제
+        func.delete(orderStat.orderID)
+        printOrderStat() # 주문 현황과 조회 수 바로 업데이트
+    else :
+        return
+
+## 거래처 현황 업데이트 ##
+def updateCustomerStat() :
+    customerStat.comboboxCustomer['values'] = func.readCustomerStat('name')
 
 ## 거래처 선택 시 해당 주문 현황 출력, 조회 수 업데이트 콜백 ##
 def printOrderStat(*args) :
@@ -263,14 +271,14 @@ class InsertWin :
         self.quantity = self.eQuantity.get()
         self.unitPrice =  self.eUnitPrice.get()
 
-        print(self.customerID, int(self.orderID), int(self.productID), self.companyName, self.orderDate, self.productName, int(self.unitPrice), int(self.quantity))
         try :
             result = func.insert(self.customerID, int(self.orderID), int(self.productID), self.companyName, self.orderDate, self.productName, int(self.unitPrice), int(self.quantity))
             if result == "clear" :
                 self.response = messagebox.askquestion("추가 요청", "정말로 추가하시겠습니까?")
                 if self.response == 'yes' : # '예'를 누르면 추가하고 창 종료
                     self.insertWin.destroy()
-                    window.update()
+                    updateCustomerStat()
+                    printOrderStat()
             elif result == "duplication" :
                 messagebox.showinfo("중복", "추가를 실패했습니다.\n모두 이미 존재하는 ID입니다.")
             elif result == "impossible" :
@@ -345,7 +353,8 @@ class UpdateWin :
 
         if self.response == 'yes' : # '예'를 누르면 수정하고 창 종료
             self.updateWin.destroy()
-            window.update()
+            updateCustomerStat()
+            printOrderStat()
 
 ## main 함수 ##
 if __name__ == "__main__":

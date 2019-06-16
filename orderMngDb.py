@@ -25,7 +25,7 @@ def dupliCheck(cursor, pk, tableName) :
         cursor.execute(query.selectCustomersPK())
         for row in cursor.fetchall():
             if pk == row[0] :
-                return "duplCstomer"
+                return "duplCustomer"
             else :
                 return "clear"
     elif tableName == 'Products' :
@@ -112,14 +112,7 @@ class Function :
                                                         # row[6] = TotalPrice
         return rowsList
 
-    ## choice 별 추가, 주문 번호는 항상 추가되도록 ##
-    # 아에 다 받고 하던지 -> 선택 시에 새로 추가하는 거 선택하면 자동으로 +1된 ID값
-    # 그럼 인자값에 디폴트로 넣어주기?
-    # 중복검사는 자동 증가로 ?
-    # commit
-    # 트랜잭션 문제
-    # ID 값을 가져와야해 -> 아에 화면에 값을 넣어 놓고 그걸 가져올거냐 어차피 화면에는 표시할거임, 여기서 넣을거냐
-    # 중복검사만 하자 반복문 try
+    ## 추가 기능 구현 ##
     def insert(self, customerID, orderID, productID,
                 companyName, orderDate, productName, unitPrice, quantity) :
         sqlCus = query.insertCustomers(customerID, companyName)             # 각 테이블 별 삽입 sql
